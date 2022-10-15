@@ -29,7 +29,7 @@ export default defineConfig({
       },
     }),
     Components({
-      dirs: ['src/components','src/icons'],
+      dirs: ['src/components','src/icons','tests/data'],
       extensions: ['vue'],
     }),
   ],

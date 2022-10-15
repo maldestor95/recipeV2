@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import IndexPage from '@/pages/IndexPage.vue'
 import ScorePage from '@/pages/score-page.vue'
-import RecipePage from '@/pages/recipe-page.vue'
+import RecipePage from '@/pages/recipe/recipe-page.vue'
 import TestPage from '@/pages/test-page.vue'
 
 const routes = [
