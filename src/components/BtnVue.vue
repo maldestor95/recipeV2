@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <!-- <div class="relative"> -->
     <button @mouseover="show='block'" @mouseleave="show='hidden'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="score">
       <slot></slot> 
     </button>
@@ -8,7 +8,7 @@
       <slot name="tooltip">  
       </slot>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script setup lang="ts">
