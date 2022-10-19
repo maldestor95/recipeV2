@@ -1,52 +1,49 @@
 <script setup lang="ts">
-import recipe from '../../../tests/data/baraupetitlegume'
 import {marked} from 'marked'
+import type {RecipeType} from "./recipe"
+export interface Props{
+    msg?: string
+    labels?: string[]
+    recipe?: RecipeType
+}
 
-import {parseRecipe} from "./recipe"
-const ingredients= [
-    {'name':'carottes', qty:'2'},
-    {'name':'tomates', qty:'3'},
-    {'name':'pommes de terres', qty:'4'},
-    {'name':'ail', qty:'1 tête'},
-]
-const recipeName = 'Example de recette'
-const displayRecipe = parseRecipe(recipe)
-const steps = !displayRecipe.steps?"":marked(<string>displayRecipe.steps)
+const props = withDefaults(defineProps<Props>(), {
+  msg: 'hello',
+  labels: () => ['one', 'two'],
+  recipe: () => {return {
+            'title':'titre',
+            'ingredients': [{ingredient:"tomate",qty:"12"}],
+            'link':'none',
+            'steps':'no steps'
+            }
+        }
+})
+
 </script>
 
 <template>
-toto
     <page-vue>
         <template #header>
-            {{recipeName}}
+            {{props.recipe.title}}
        </template>
-       <p>{{displayRecipe.title}}</p>
-       <p>{{displayRecipe.link}}</p>
-       <div> ingredients</div>
-       <ul>
-        <li v-for="ingredient in displayRecipe.ingredients" :key="ingredient.name">
-            {{ ingredient.ingredient }} {{ingredient.qty}}
-        </li>
-       </ul>
-       <div> instructions</div>
-       <p v-html="steps"></p>
-       <div> validation </div>
-
-    </page-vue>
-    <page-vue>
-        <template #header>
-            <btn-vue>edition <template #tooltip>EDITION de {{recipeName}}</template>
-            </btn-vue> {{recipeName}}
-       </template>
-       Recette edition page
-       <div class="bg-pink-200 my-3"> ingredients
-            <p class="bg-pink-300 px-8">Edition / ajout /supprimer</p>
-            <p class="bg-pink-300 px-8">ajouter un ingredient</p>
-       </div>
-       <div class="bg-pink-200 my-3"> instructions
-            <p class="bg-pink-300 px-8">Etapes avec edition/ ajout /supprimer</p>
-            <p class="bg-pink-300 px-8">ajouter une étape</p>
-       </div>
-       <div class ="bg-pink-200 my-3"> validation </div>
+       <h2 class="border-grey-200 border-solid border-b-2 pb-2"> Ingredients</h2>
+       <table>
+        <tr v-for="ingredient in props.recipe.ingredients" :key="ingredient.ingredient">
+            <td>
+            <div class="first-letter:capitalize text-base">
+                {{ ingredient.ingredient }}
+            </div>
+            </td>
+            <td>
+                {{ingredient.qty}}
+            </td>
+        </tr>
+       </table>
+       <h2 class="border-grey-200 border-solid border-b-2 pb-2"> Instructions</h2>
+       <div
+            class="first-letter:capitalize" 
+            v-html="marked(<string>props.recipe.steps)">
+            
+        </div>
     </page-vue>
 </template>

@@ -4,7 +4,7 @@ type Ingredient =
 { ingredient:string,
     qty: string}
 
-export type Recipe ={ 
+export type RecipeType ={ 
     title: string,
     link:  string,
     ingredients:Ingredient[]
@@ -21,14 +21,14 @@ const convertMarkdownRecipe= function(mdData:string):{err:string|null,data: {yml
 
     const extractYmlPart= mdData.substring(0, endYamlPosition + 3);   
     const extractMdPart= mdData.substring(endYamlPosition + 3);
-    console.log(extractMdPart)
+    // console.log(extractMdPart)
     return {err:null,data:{yml:extractYmlPart,md:extractMdPart}}
 }
 
 export function parseRecipe(recipe:string):Recipe{
     const {data}=convertMarkdownRecipe(recipe)
     const dataParsed= yaml.parse(data.yml)
-    const ParsedRecipe:Recipe= {
+    const ParsedRecipe:RecipeType= {
         title: dataParsed.title,
         link:  dataParsed.link,
         ingredients:dataParsed.ingredients,

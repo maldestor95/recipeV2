@@ -1,4 +1,4 @@
-const recipe=`---
+const recipeBar=`---
 title: Bar aux petits légumes
 link:  baraupetitlegume.md
 
@@ -44,4 +44,4 @@ Enfourner thermostat 6-7, à 200°, environ 30 min.
 
 https://www.marmiton.org/recettes/recette_bar-aux-petits-legumes_84943.aspx
 `
-export default  recipe
+export default  recipeBar
